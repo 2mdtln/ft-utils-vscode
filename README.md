@@ -18,7 +18,7 @@ Drop a 42 header into any file with one shortcut. The extension keeps the classi
 ## Install
 
 1. Launch VS Code and open the Extensions view.
-2. Search for **42 Header** and click **Install** (or run `ext install 42-header` from the command palette).
+2. Search for **42 Header** and click **Install** (or run `ext install ft-header` from the command palette).
 3. Reload VS Code if prompted.
 
 ## How to Use
