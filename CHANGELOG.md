@@ -1,9 +1,5 @@
 # Change Log
 
-All notable changes to the "42-header" extension will be documented in this file.
+## 1.2.4 - 2025-11-15
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
-
-## [Unreleased]
-
-- Initial release
+- Stable release with header insertion, multi-language support, save-time updates, and optional auto insert toggle.

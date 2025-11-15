@@ -1,71 +1,58 @@
-# 42-header README
+# 42 Header
 
-This is the README for your extension "42-header". After writing up a brief description, we recommend including the following sections.
+Drop a 42 header into any file with one shortcut. The extension keeps the classic layout, remembers the original “Created” timestamp, and updates the “Updated” line every time you save.
 
-## Features
+```bash
+# ****************************************************************************** #
+#                                                                                #
+#                                                           :::      ::::::::    #
+#   42-header                                             :+:      :+:    :+:    #
+#                                                       +:+ +:+         +:+      #
+#   By: mtaheri <mtaheri@student.42istanbul.com.tr>   +#+  +:+       +#+         #
+#                                                   +#+#+#+#+#+   +#+            #
+#   Created: 2025/11/15 23:19:08 by mtaheri              #+#    #+#              #
+#   Updated: 2025/11/15 23:19:08 by mtaheri             ###   ########.fr        #
+#                                                                                #
+# ****************************************************************************** #
+```
+## Install
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+1. Launch VS Code and open the Extensions view.
+2. Search for **42 Header** and click **Install** (or run `ext install 42-header` from the command palette).
+3. Reload VS Code if prompted.
 
-For example if there is an image subfolder under your extension project workspace:
+## How to Use
 
-\!\[feature X\]\(images/feature-x.png\)
+1. Open any supported source file (C, C++, JavaScript, Python, etc.).
+2. Press `⌘⌥H` (macOS) or `Ctrl+Alt+H` (Windows/Linux), or run **Insert 42 Header** from the Command Palette.
+3. The header is inserted at the top of the file. Re-running the command refreshes only the “Updated” timestamp.
+4. Saving a file that already contains the header automatically updates the `Updated` line.
+5. Use the status bar toggle labeled **42 Auto Header** to enable automatic insertion whenever you create a new file.
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## How to Configure
 
-## Requirements
+Open **Settings → Extensions → 42 Header** (or search for `42 Header` in the Settings UI) and adjust:
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+| Setting | Description |
+| --- | --- |
+| `42-header.username` | Your 42 login (used for By, Created, Updated lines). |
+| `42-header.email` | Your 42 student email. |
+| `42-header.headerWidth` | Total width of the header block (default: 80). Increase for longer names. |
 
-## Extension Settings
+Prefer configuring via `settings.json`? Add:
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+```json
+{
+  "42-header.username": "your_login",
+  "42-header.email": "your_login@student.42.fr",
+  "42-header.headerWidth": 80
+}
+```
 
-For example:
+## Issues & Contributing
 
-This extension contributes the following settings:
+Bug reports and pull requests are welcome! Please open an issue with reproduction steps or a PR describing the change.
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+## License
 
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+MIT © 2025 — feel free to use, modify, and distribute under the terms of the MIT license.

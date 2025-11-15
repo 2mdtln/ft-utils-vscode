@@ -1,48 +1,84 @@
 {
   "name": "42-header",
   "displayName": "42 Header",
-  "description": "Generate 42 file headers instantly.",
-  "version": "0.0.1",
+  "description": "Generate 42-style file headers using your name, email, with customizable header width for long names. Great for Piscine and Core projects.",
+  "version": "1.2.4",
+  "icon": "42.png",
+  "publisher": "2mdtln",
   "engines": {
     "vscode": "^1.106.0"
   },
   "categories": [
-    "Other"
+    "Snippets",
+	"Other"
+  ],
+  "keywords": [
+  	"42",
+  	"header",
+  	"piscine",
+  	"template",
+  	"intra",
+	"norm"
   ],
   "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "42-header.helloWorld",
-        "title": "Hello World"
+        "command": "42-header.insertHeader",
+        "title": "Insert 42 Header"
+      },
+      {
+        "command": "42-header.toggleAutoInsert",
+        "title": "Toggle 42 Auto Header"
       }
-    ]
+    ],
+    "keybindings": [
+      {
+        "command": "42-header.insertHeader",
+        "key": "ctrl+alt+h",
+        "mac": "cmd+alt+h",
+        "win": "ctrl+alt+h",
+        "linux": "ctrl+alt+h"
+      }
+    ],
+    "configuration": {
+      "title": "42 Header",
+      "properties": {
+        "42-header.username": {
+          "type": "string",
+          "description": "Student username printed throughout the 42 header.",
+          "default": ""
+        },
+        "42-header.email": {
+          "type": "string",
+          "description": "Student email address for the header.",
+          "default": ""
+        },
+        "42-header.headerWidth": {
+          "type": "number",
+          "description": "Total width of the generated header (including /* */).",
+          "default": 80,
+          "minimum": 70,
+          "maximum": 160
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "pnpm run package",
     "compile": "pnpm run check-types && pnpm run lint && node esbuild.js",
-    "watch": "npm-run-all -p watch:*",
-    "watch:esbuild": "node esbuild.js --watch",
-    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "watch": "node esbuild.js --watch",
     "package": "pnpm run check-types && pnpm run lint && node esbuild.js --production",
-    "compile-tests": "tsc -p . --outDir out",
-    "watch-tests": "tsc -p . -w --outDir out",
-    "pretest": "pnpm run compile-tests && pnpm run compile && pnpm run lint",
     "check-types": "tsc --noEmit",
-    "lint": "eslint src",
-    "test": "vscode-test"
+    "lint": "eslint src"
   },
   "devDependencies": {
     "@types/vscode": "^1.106.0",
-    "@types/mocha": "^10.0.10",
     "@types/node": "22.x",
     "typescript-eslint": "^8.46.3",
     "eslint": "^9.39.1",
     "esbuild": "^0.27.0",
-    "npm-run-all": "^4.1.5",
-    "typescript": "^5.9.3",
-    "@vscode/test-cli": "^0.0.12",
-    "@vscode/test-electron": "^2.5.2"
+    "typescript": "^5.9.3"
   }
 }
