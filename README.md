@@ -3,17 +3,17 @@
 Drop a 42 header into any file with one shortcut. The extension keeps the classic layout, remembers the original “Created” timestamp, and updates the “Updated” line every time you save.
 
 ```bash
-# ****************************************************************************** #
-#                                                                                #
-#                                                           :::      ::::::::    #
-#   ft_header                                             :+:      :+:    :+:    #
-#                                                       +:+ +:+         +:+      #
-#   By: mtaheri <mtaheri@student.42istanbul.com.tr>   +#+  +:+       +#+         #
-#                                                   +#+#+#+#+#+   +#+            #
-#   Created: 2025/11/15 20:39:25 by mtaheri              #+#    #+#              #
-#   Updated: 2025/11/16 10:19:53 by mtaheri             ###   ########.fr        #
-#                                                                                #
-# ****************************************************************************** #
+# **************************************************************************** #
+#                                                                              #
+#                                                          :::      ::::::::   #
+#   ft_header                                            :+:      :+:    :+:   #
+#                                                      +:+ +:+         +:+     #
+#   By: mtaheri <mtaheri@student.42istanbul.com.tr>  +#+  +:+       +#+        #
+#                                                  +#+#+#+#+#+   +#+           #
+#   Created: 2025/11/15 20:39:25 by mtaheri             #+#    #+#             #
+#   Updated: 2025/11/16 19:08:47 by mtaheri            ###   ########.fr       #
+#                                                                              #
+# **************************************************************************** #
 ```
 ## Install
 
