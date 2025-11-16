@@ -2,31 +2,31 @@
   "name": "ft-header",
   "displayName": "ft_header",
   "description": "Generate 42-style file headers using your name, email, with customizable header width for long names. Great for Piscine and Core projects.",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "icon": "42.png",
   "publisher": "2mdtln",
   "repository": {
-  "type": "git",
-  "url": "https://github.com/2mdtln/ft-header-vscode.git"
+    "type": "git",
+    "url": "https://github.com/2mdtln/ft-header-vscode.git"
   },
   "bugs": {
     "url": "https://github.com/2mdtln/ft-header-vscode/issues"
   },
   "homepage": "https://github.com/2mdtln/ft-header-vscode",
   "engines": {
-    "vscode": "^1.106.0"
+    "vscode": "^1.70.0"
   },
   "categories": [
     "Snippets",
-	"Other"
+    "Other"
   ],
   "keywords": [
-  	"42",
-  	"header",
-  	"piscine",
-  	"template",
-  	"intra",
-	"norm"
+    "42",
+    "header",
+    "piscine",
+    "template",
+    "intra",
+    "norm"
   ],
   "activationEvents": [],
   "main": "./dist/extension.js",
@@ -82,11 +82,11 @@
     "lint": "eslint src"
   },
   "devDependencies": {
-    "@types/vscode": "^1.106.0",
     "@types/node": "22.x",
-    "typescript-eslint": "^8.46.3",
-    "eslint": "^9.39.1",
+    "@types/vscode": "^1.70.0",
     "esbuild": "^0.27.0",
-    "typescript": "^5.9.3"
+    "eslint": "^9.39.1",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.3"
   }
 }

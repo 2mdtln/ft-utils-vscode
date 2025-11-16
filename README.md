@@ -10,15 +10,15 @@ Drop a 42 header into any file with one shortcut. The extension keeps the classi
 #                                                       +:+ +:+         +:+      #
 #   By: mtaheri <mtaheri@student.42istanbul.com.tr>   +#+  +:+       +#+         #
 #                                                   +#+#+#+#+#+   +#+            #
-#   Created: 2025/11/15 23:19:08 by mtaheri              #+#    #+#              #
-#   Updated: 2025/11/15 23:19:08 by mtaheri             ###   ########.fr        #
+#   Created: 2025/11/15 20:39:25 by mtaheri              #+#    #+#              #
+#   Updated: 2025/11/16 08:50:42 by mtaheri             ###   ########.fr        #
 #                                                                                #
 # ****************************************************************************** #
 ```
 ## Install
 
 1. Launch VS Code and open the Extensions view.
-2. Search for **42 Header** and click **Install** (or run `ext install ft-header` from the command palette).
+2. Search for **ft_header** and click **Install** (or run `ext install 2mdtln.ft-header` from the command palette).
 3. Reload VS Code if prompted.
 
 ## How to Use
