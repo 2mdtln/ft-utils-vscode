@@ -28,13 +28,15 @@ export function detectHeader(document: vscode.TextDocument): ExistingHeader | un
 	);
 
 	let createdAt: string | undefined;
+	let createdBy: string | undefined;
 	const createdLine = document.lineAt(CREATED_LINE_INDEX).text;
-	const match = createdLine.match(/Created:\s+(\d{4}\/\d{2}\/\d{2}\s+\d{2}:\d{2}:\d{2})/);
+	const match = createdLine.match(/Created:\s+(\d{4}\/\d{2}\/\d{2}\s+\d{2}:\d{2}:\d{2})\s+by\s+(\S+)/);
 	if (match) {
 		createdAt = match[1];
+		createdBy = match[2];
 	}
 
-	return { range, createdAt, delimiters };
+	return { range, createdAt, createdBy, delimiters };
 }
 
 export function createHeaderEdit(document: vscode.TextDocument, settings: HeaderSettings): vscode.TextEdit | undefined {
@@ -45,7 +47,21 @@ export function createHeaderEdit(document: vscode.TextDocument, settings: Header
 
 	const now = formatTimestamp(new Date());
 	const createdAt = detection.createdAt ?? now;
+	const createdBy = detection.createdBy ?? settings.username;
 	const fileName = path.basename(document.fileName);
-	const headerText = buildHeaderText(fileName, settings, createdAt, now, detection.delimiters);
-	return new vscode.TextEdit(detection.range, headerText);
+	const eol = document.eol === vscode.EndOfLine.CRLF ? '\r\n' : '\n';
+	const needsSeparatorLine = hasTextDirectlyBelowHeader(document);
+	const replacementRange = needsSeparatorLine
+		? new vscode.Range(new vscode.Position(0, 0), new vscode.Position(HEADER_LINE_COUNT, 0))
+		: detection.range;
+	const separator = needsSeparatorLine ? eol.repeat(2) : '';
+	const headerText = buildHeaderText(fileName, settings, createdAt, now, detection.delimiters, createdBy) + separator;
+	return new vscode.TextEdit(replacementRange, headerText);
+}
+
+function hasTextDirectlyBelowHeader(document: vscode.TextDocument): boolean {
+	if (document.lineCount <= HEADER_LINE_COUNT) {
+		return false;
+	}
+	return document.lineAt(HEADER_LINE_COUNT).text.trim().length > 0;
 }

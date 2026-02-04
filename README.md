@@ -11,7 +11,7 @@ Drop a 42 header into any file with one shortcut. The extension keeps the classi
 #   By: mtaheri <mtaheri@student.42istanbul.com.tr>  +#+  +:+       +#+        #
 #                                                  +#+#+#+#+#+   +#+           #
 #   Created: 2025/11/15 20:39:25 by mtaheri             #+#    #+#             #
-#   Updated: 2025/11/16 19:08:47 by mtaheri            ###   ########.fr       #
+#   Updated: 2026/02/04 18:38:54 by ybarut             ###   ########.fr       #
 #                                                                              #
 # **************************************************************************** #
 ```

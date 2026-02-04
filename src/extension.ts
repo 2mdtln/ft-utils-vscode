@@ -1,6 +1,7 @@
 import * as path from 'node:path';
 import * as vscode from 'vscode';
 import { AutoInsertController } from './autoInsertController';
+import { HEADER_LINE_COUNT } from './headerConstants';
 import { buildHeaderText } from './headerFormat';
 import { detectHeader, createHeaderEdit } from './headerDetection';
 import { getDelimitersForDocument } from './commentDelimiters';
@@ -78,7 +79,10 @@ async function applyHeader(editor: vscode.TextEditor, settings: HeaderSettings):
 
 	const now = formatTimestamp(new Date());
 	const createdAt = detection?.createdAt ?? now;
-	const headerText = buildHeaderText(fileName, settings, createdAt, now, delimiters);
+	const createdBy = detection?.createdBy ?? settings.username;
+	const needsSeparatorLine = detection ? hasTextDirectlyBelowHeader(document) : false;
+	const separator = needsSeparatorLine ? '\n' : '';
+	const headerText = buildHeaderText(fileName, settings, createdAt, now, delimiters, createdBy) + separator;
 
 	await editor.edit(editBuilder => {
 		if (detection) {
@@ -91,4 +95,11 @@ async function applyHeader(editor: vscode.TextEditor, settings: HeaderSettings):
 	});
 
 	return result;
+}
+
+function hasTextDirectlyBelowHeader(document: vscode.TextDocument): boolean {
+	if (document.lineCount <= HEADER_LINE_COUNT) {
+		return false;
+	}
+	return document.lineAt(HEADER_LINE_COUNT).text.trim().length > 0;
 }

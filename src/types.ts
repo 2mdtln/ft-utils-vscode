@@ -13,5 +13,6 @@ export type HeaderSettings = {
 export type ExistingHeader = {
 	range: vscode.Range;
 	createdAt?: string;
+	createdBy?: string;
 	delimiters: CommentDelimiters;
 };
