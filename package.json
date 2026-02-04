@@ -2,7 +2,7 @@
   "name": "ft-header",
   "displayName": "ft_header",
   "description": "Generate 42 file headers using your name, email for Piscine and Core projects.",
-  "version": "1.2.71",
+  "version": "1.2.8",
   "icon": "42.png",
   "publisher": "2mdtln",
   "repository": {
@@ -28,7 +28,9 @@
     "intra",
     "norm"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
