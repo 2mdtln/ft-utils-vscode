@@ -6,7 +6,7 @@ export type CommentDelimiters = Readonly<{
 }>;
 
 export type HeaderSettings = {
-	username: string;
+	login: string;
 	email: string;
 };
 

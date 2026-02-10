@@ -47,7 +47,7 @@ export function createHeaderEdit(document: vscode.TextDocument, settings: Header
 
 	const now = formatTimestamp(new Date());
 	const createdAt = detection.createdAt ?? now;
-	const createdBy = detection.createdBy ?? settings.username;
+	const createdBy = detection.createdBy ?? settings.login;
 	const fileName = path.basename(document.fileName);
 	const eol = document.eol === vscode.EndOfLine.CRLF ? '\r\n' : '\n';
 	const needsSeparatorLine = hasTextDirectlyBelowHeader(document);

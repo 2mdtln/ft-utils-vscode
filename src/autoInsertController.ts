@@ -7,7 +7,7 @@ import type { HeaderSettings } from './types';
 import { formatTimestamp } from './time';
 import { StatusNotifier } from './statusNotifier';
 
-const AUTO_INSERT_STATE_KEY = 'ft_header.autoInsertOnCreate';
+const AUTO_INSERT_STATE_KEY = 'ft_utils.autoInsertOnCreate';
 const STATUS_LABEL = '42 Auto Header';
 
 export class AutoInsertController implements vscode.Disposable {
@@ -15,7 +15,7 @@ export class AutoInsertController implements vscode.Disposable {
 
 	constructor(private readonly context: vscode.ExtensionContext, private readonly notifier: StatusNotifier) {
 		this.statusItem = vscode.window.createStatusBarItem('42HeaderAutoInsert', vscode.StatusBarAlignment.Right, 100);
-		this.statusItem.command = 'ft_header.toggleAutoInsert';
+		this.statusItem.command = 'ft_utils.toggleAutoInsert';
 		this.updateStatusBar();
 		this.statusItem.show();
 	}

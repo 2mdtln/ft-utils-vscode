@@ -5,16 +5,27 @@ import { HEADER_LINE_COUNT } from './headerConstants';
 import { buildHeaderText } from './headerFormat';
 import { detectHeader, createHeaderEdit } from './headerDetection';
 import { getDelimitersForDocument } from './commentDelimiters';
-import { promptForSettings, readSettings } from './settings';
+import { promptForSettings, readSettings, warnMissingSettings } from './settings';
 import { formatTimestamp } from './time';
 import type { HeaderSettings } from './types';
 import { StatusNotifier } from './statusNotifier';
+import { FunctionCountStatus } from './functionCountStatus';
 
 export function activate(context: vscode.ExtensionContext) {
 	const notifier = new StatusNotifier();
+	const starPromptCommand = vscode.commands.registerCommand('ft_utils.showStarPrompt', async () => {
+		const choice = await vscode.window.showInformationMessage(
+			'If you find this extension helpful, consider giving it a ⭐️ on GitHub :)',
+			'Open Repository',
+		);
+		if (choice === 'Open Repository') {
+			await vscode.env.openExternal(vscode.Uri.parse('https://github.com/2mdtln/ft-utils-vscode'));
+		}
+	});
+	const functionCountStatus = new FunctionCountStatus('ft_utils.showStarPrompt');
 	const autoInsertController = new AutoInsertController(context, notifier);
 
-	const insertCommand = vscode.commands.registerCommand('ft_header.insertHeader', async () => {
+	const insertCommand = vscode.commands.registerCommand('ft_utils.insertHeader', async () => {
 		const editor = vscode.window.activeTextEditor;
 		if (!editor) {
 			vscode.window.showErrorMessage('Open a file before inserting a 42 header.');
@@ -22,7 +33,7 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 
 		const settings = readSettings();
-		if (!settings.username || !settings.email) {
+		if (!settings.login || !settings.email) {
 			await promptForSettings();
 			return;
 		}
@@ -33,7 +44,8 @@ export function activate(context: vscode.ExtensionContext) {
 
 	const saveSubscription = vscode.workspace.onWillSaveTextDocument(event => {
 		const settings = readSettings();
-		if (!settings.username || !settings.email) {
+		if (!settings.login || !settings.email) {
+			warnMissingSettings();
 			return;
 		}
 
@@ -46,11 +58,11 @@ export function activate(context: vscode.ExtensionContext) {
 		})());
 	});
 
-	const toggleAutoInsert = vscode.commands.registerCommand('ft_header.toggleAutoInsert', () => autoInsertController.toggle());
+	const toggleAutoInsert = vscode.commands.registerCommand('ft_utils.toggleAutoInsert', () => autoInsertController.toggle());
 
 	const fileCreateSubscription = vscode.workspace.onDidCreateFiles(async event => {
 		const settings = readSettings();
-		if (!settings.username || !settings.email) {
+		if (!settings.login || !settings.email) {
 			return;
 		}
 		await autoInsertController.handleFileCreation(event.files, settings);
@@ -58,11 +70,13 @@ export function activate(context: vscode.ExtensionContext) {
 
 	context.subscriptions.push(
 		insertCommand,
+		starPromptCommand,
 		saveSubscription,
 		toggleAutoInsert,
 		fileCreateSubscription,
 		autoInsertController,
 		notifier,
+		functionCountStatus,
 	);
 }
 
@@ -79,7 +93,7 @@ async function applyHeader(editor: vscode.TextEditor, settings: HeaderSettings):
 
 	const now = formatTimestamp(new Date());
 	const createdAt = detection?.createdAt ?? now;
-	const createdBy = detection?.createdBy ?? settings.username;
+	const createdBy = detection?.createdBy ?? settings.login;
 	const needsSeparatorLine = detection ? hasTextDirectlyBelowHeader(document) : false;
 	const separator = needsSeparatorLine ? '\n' : '';
 	const headerText = buildHeaderText(fileName, settings, createdAt, now, delimiters, createdBy) + separator;

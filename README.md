@@ -1,12 +1,15 @@
-# ft_header
+# ft_utils
 
-Drop a 42 header into any file with one shortcut. The extension keeps the classic layout, remembers the original “Created” timestamp, and updates the “Updated” line every time you save.
+Practical 42 utilities for VS Code focused on everyday C workflow:
+- Insert and maintain the 42 header
+- Auto-insert headers on new files
+- Track function count in `.c` files from the status bar
 
 ```bash
 # **************************************************************************** #
 #                                                                              #
 #                                                          :::      ::::::::   #
-#   ft_header                                            :+:      :+:    :+:   #
+#   ft_utils                                             :+:      :+:    :+:   #
 #                                                      +:+ +:+         +:+     #
 #   By: mtaheri <mtaheri@student.42istanbul.com.tr>  +#+  +:+       +#+        #
 #                                                  +#+#+#+#+#+   +#+           #
@@ -15,42 +18,59 @@ Drop a 42 header into any file with one shortcut. The extension keeps the classi
 #                                                                              #
 # **************************************************************************** #
 ```
+
 ## Install
 
-1. Launch VS Code and open the Extensions view.
-2. Search for **ft_header** and click **Install** (or run `ext install 2mdtln.ft-header` from the command palette).
-3. Reload VS Code if prompted.
+1. Open Extensions in VS Code.
+2. Search for `ft_utils` and install.
+3. Or run `ext install 2mdtln.ft-header` from the Command Palette.
 
-## How to Use
+## What It Does
 
-1. Open any supported source file (C, C++, JavaScript, Python, etc.).
-2. Press `⌘⌥H` (macOS) or `Ctrl+Alt+H` (Windows/Linux), or run **Insert 42 Header** from the Command Palette.
-3. The header is inserted at the top of the file. Re-running the command refreshes only the “Updated” timestamp.
-4. Saving a file that already contains the header automatically updates the `Updated` line.
-5. Use the status bar toggle labeled **42 Auto Header** to enable automatic insertion whenever you create a new file.
+### 42 Header
+- Command: `ft_utils: Insert 42 Header`
+- Shortcut: `Cmd+Alt+H` (macOS) / `Ctrl+Alt+H` (Windows/Linux)
+- Inserts the standard 42 header at the top of the file.
+- If the header already exists, it updates the `Updated` line.
+- Saving a file with an existing header refreshes the `Updated` timestamp.
+- Supports long logins and long emails while preserving header layout.
 
-## How to Configure
+### Auto Header
+- Toggle from the status bar: **42 Auto Header**
+- Toggle from command: `ft_utils: Toggle 42 Auto Header`
+- When enabled, creating a new file auto-inserts a header.
 
-Open **Settings → Extensions → ft_header** (or search for `ft_header` in the Settings UI) and adjust:
+### Function Count (`.c`)
+- Shows `Function Count: N` in the status bar when a `.c` file is active.
+- Warns when function count is `> 5`.
+- Updates automatically as you edit.
 
-| Setting | Description |
-| --- | --- |
-| `ft_header.username` | Your 42 login (used for By, Created, Updated lines). |
-| `ft_header.email` | Your 42 student email. |
+## Configuration
 
-Prefer configuring via `settings.json`? Add:
+You can configure the extension in 2 ways.
+
+### Settings UI
+1. Open VS Code Settings.
+2. Search for `ft_utils`.
+3. Set:
+- `ft_utils.login` (your 42 login)
+- `ft_utils.email` (your 42 email)
+
+### `settings.json`
+Add these keys to your VS Code `settings.json`:
 
 ```json
 {
-  "ft_header.username": "your_login",
-  "ft_header.email": "your_login@student.42.fr"
+  "ft_utils.login": "login",
+  "ft_utils.email": "login@student.42.fr"
 }
 ```
 
-## Issues & Contributing
+## Star
 
-Bug reports and pull requests are welcome! Please open an issue with reproduction steps or a PR describing the change.
+If this extension helps your workflow, please ⭐️ the repo. thanks :)
 
 ## License
 
-MIT © 2025 — feel free to use, modify, and distribute under the terms of the MIT license.
+This project is licensed under the [MIT License](https://github.com/2mdtln/ft-utils-vscode/blob/main/LICENSE).  
+© 2025–2026 Muhammed T (2mdtln)

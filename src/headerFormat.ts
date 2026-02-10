@@ -17,9 +17,9 @@ export function buildHeaderText(
 	createdAt: string,
 	updatedAt: string,
 	delimiters: CommentDelimiters,
-	createdByUsername = settings.username,
+	createdBylogin = settings.login,
 ): string {
-	return buildHeaderLines(fileName, settings, createdAt, updatedAt, delimiters, createdByUsername).join('\n');
+	return buildHeaderLines(fileName, settings, createdAt, updatedAt, delimiters, createdBylogin).join('\n');
 }
 
 export function buildHeaderLines(
@@ -28,10 +28,10 @@ export function buildHeaderLines(
 	createdAt: string,
 	updatedAt: string,
 	delimiters: CommentDelimiters,
-	createdByUsername = settings.username,
+	createdBylogin = settings.login,
 ): string[] {
 	const innerWidth = computeInnerWidth(DEFAULT_HEADER_WIDTH, delimiters);
-	const identity = `${settings.username} <${settings.email}>`;
+	const identity = `${settings.login} <${settings.email}>`;
 
 	return [
 		formatBorder(innerWidth, delimiters),
@@ -41,8 +41,8 @@ export function buildHeaderLines(
 		formatRightAligned(COLUMN_SUFFIX, innerWidth, delimiters),
 		formatLine(`  By: ${identity}`, BY_SUFFIX, innerWidth, delimiters),
 		formatRightAligned(SPACER_SUFFIX, innerWidth, delimiters),
-		formatLine(`  Created: ${createdAt} by ${createdByUsername}`, CREATED_SUFFIX, innerWidth, delimiters),
-		formatLine(`  Updated: ${updatedAt} by ${settings.username}`, UPDATED_SUFFIX, innerWidth, delimiters),
+		formatLine(`  Created: ${createdAt} by ${createdBylogin}`, CREATED_SUFFIX, innerWidth, delimiters),
+		formatLine(`  Updated: ${updatedAt} by ${settings.login}`, UPDATED_SUFFIX, innerWidth, delimiters),
 		formatEmpty(innerWidth, delimiters),
 		formatBorder(innerWidth, delimiters),
 	];

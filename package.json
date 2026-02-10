@@ -1,18 +1,18 @@
 {
   "name": "ft-header",
-  "displayName": "ft_header",
-  "description": "Generate 42 file headers using your name, email for Piscine and Core projects.",
-  "version": "1.2.8",
+  "displayName": "ft_utils",
+  "description": "42 utilities for C projects: header, function count, and more.",
+  "version": "2.1.0",
   "icon": "42.png",
   "publisher": "2mdtln",
   "repository": {
     "type": "git",
-    "url": "https://github.com/2mdtln/ft-header-vscode.git"
+    "url": "https://github.com/2mdtln/ft-utils-vscode.git"
   },
   "bugs": {
-    "url": "https://github.com/2mdtln/ft-header-vscode/issues"
+    "url": "https://github.com/2mdtln/ft-utils-vscode/issues"
   },
-  "homepage": "https://github.com/2mdtln/ft-header-vscode",
+  "homepage": "https://github.com/2mdtln/ft-utils-vscode",
   "engines": {
     "vscode": "^1.70.0"
   },
@@ -35,17 +35,21 @@
   "contributes": {
     "commands": [
       {
-        "command": "ft_header.insertHeader",
+        "command": "ft_utils.insertHeader",
         "title": "Insert 42 Header"
       },
       {
-        "command": "ft_header.toggleAutoInsert",
+        "command": "ft_utils.toggleAutoInsert",
         "title": "Toggle 42 Auto Header"
+      },
+      {
+        "command": "ft_utils.showStarPrompt",
+        "title": "Show GitHub Star Prompt"
       }
     ],
     "keybindings": [
       {
-        "command": "ft_header.insertHeader",
+        "command": "ft_utils.insertHeader",
         "key": "ctrl+alt+h",
         "mac": "cmd+alt+h",
         "win": "ctrl+alt+h",
@@ -53,16 +57,16 @@
       }
     ],
     "configuration": {
-      "title": "ft_header",
+      "title": "ft_utils",
       "properties": {
-        "ft_header.username": {
+        "ft_utils.login": {
           "type": "string",
-          "description": "Student username printed throughout the 42 header.",
+          "description": "Student login on header.",
           "default": ""
         },
-        "ft_header.email": {
+        "ft_utils.email": {
           "type": "string",
-          "description": "Student email address for the header.",
+          "description": "Student email on header.",
           "default": ""
         }
       }
