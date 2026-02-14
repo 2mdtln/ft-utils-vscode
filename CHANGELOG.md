@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.3.0 - 2026-02-14
+
+- Added Python-specific 79-character header width for flake8 `E501` compatibility.
+- Added command: `ft_utils: Toggle Header Update On Save` (enabled by default).
+
 ## 2.1.0 - 2026-02-10
 
 - Rebranded extension name to `ft_utils`.

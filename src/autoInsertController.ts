@@ -1,5 +1,6 @@
 import * as path from 'node:path';
 import * as vscode from 'vscode';
+import { getHeaderWidthForLanguage } from './headerConstants';
 import { buildHeaderText } from './headerFormat';
 import { detectHeader } from './headerDetection';
 import { getDelimitersForDocument } from './commentDelimiters';
@@ -62,7 +63,8 @@ export class AutoInsertController implements vscode.Disposable {
 
 			const delimiters = getDelimitersForDocument(document);
 			const now = formatTimestamp(new Date());
-			const headerText = buildHeaderText(path.basename(document.fileName), settings, now, now, delimiters);
+			const headerWidth = getHeaderWidthForLanguage(document.languageId);
+			const headerText = buildHeaderText(path.basename(document.fileName), settings, now, now, delimiters, settings.login, headerWidth);
 			const edit = new vscode.WorkspaceEdit();
 			const trailing = document.getText().length > 0 ? '\n\n' : '\n';
 			edit.insert(uri, new vscode.Position(0, 0), headerText + trailing);

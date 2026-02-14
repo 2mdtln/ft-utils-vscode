@@ -1,6 +1,6 @@
 import * as path from 'node:path';
 import * as vscode from 'vscode';
-import { CREATED_LINE_INDEX, HEADER_LINE_COUNT } from './headerConstants';
+import { CREATED_LINE_INDEX, getHeaderWidthForLanguage, HEADER_LINE_COUNT } from './headerConstants';
 import { isBorderLine, parseDelimitersFromLine } from './commentDelimiters';
 import { buildHeaderText } from './headerFormat';
 import type { ExistingHeader, HeaderSettings } from './types';
@@ -55,7 +55,8 @@ export function createHeaderEdit(document: vscode.TextDocument, settings: Header
 		? new vscode.Range(new vscode.Position(0, 0), new vscode.Position(HEADER_LINE_COUNT, 0))
 		: detection.range;
 	const separator = needsSeparatorLine ? eol.repeat(2) : '';
-	const headerText = buildHeaderText(fileName, settings, createdAt, now, detection.delimiters, createdBy) + separator;
+	const headerWidth = getHeaderWidthForLanguage(document.languageId);
+	const headerText = buildHeaderText(fileName, settings, createdAt, now, detection.delimiters, createdBy, headerWidth) + separator;
 	return new vscode.TextEdit(replacementRange, headerText);
 }
 

@@ -1,8 +1,8 @@
 {
   "name": "ft-header",
   "displayName": "ft_utils",
-  "description": "42 utilities for C projects: header, function count, and more.",
-  "version": "2.2.0",
+  "description": "Utilities for 42 students: 42 header insertion, auto-header for new files, C function count, and flake8-friendly Python header width.",
+  "version": "2.3.0",
   "icon": "42.png",
   "publisher": "2mdtln",
   "repository": {
@@ -22,11 +22,15 @@
   ],
   "keywords": [
     "42",
-    "header",
+    "ecole 42",
+    "42 header",
+    "42-header",
+    "42school",
+    "norminette",
     "piscine",
-    "template",
-    "intra",
-    "norm"
+    "ft-header",
+    "header template",
+    "c"
   ],
   "activationEvents": [
     "onStartupFinished"
@@ -41,6 +45,10 @@
       {
         "command": "ft_utils.toggleAutoInsert",
         "title": "ft_utils: Toggle 42 Auto Header"
+      },
+      {
+        "command": "ft_utils.toggleUpdateOnSave",
+        "title": "ft_utils: Toggle Header Update On Save"
       },
       {
         "command": "ft_utils.showStarPrompt",

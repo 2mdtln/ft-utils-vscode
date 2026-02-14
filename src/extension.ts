@@ -1,7 +1,7 @@
 import * as path from 'node:path';
 import * as vscode from 'vscode';
 import { AutoInsertController } from './autoInsertController';
-import { HEADER_LINE_COUNT } from './headerConstants';
+import { getHeaderWidthForLanguage, HEADER_LINE_COUNT } from './headerConstants';
 import { buildHeaderText } from './headerFormat';
 import { detectHeader, createHeaderEdit } from './headerDetection';
 import { getDelimitersForDocument } from './commentDelimiters';
@@ -10,6 +10,8 @@ import { formatTimestamp } from './time';
 import type { HeaderSettings } from './types';
 import { StatusNotifier } from './statusNotifier';
 import { FunctionCountStatus } from './functionCountStatus';
+
+const UPDATE_ON_SAVE_STATE_KEY = 'ft_utils.updateHeaderOnSave';
 
 export function activate(context: vscode.ExtensionContext) {
 	const notifier = new StatusNotifier();
@@ -43,6 +45,10 @@ export function activate(context: vscode.ExtensionContext) {
 	});
 
 	const saveSubscription = vscode.workspace.onWillSaveTextDocument(event => {
+		if (!isHeaderUpdateOnSaveEnabled(context)) {
+			return;
+		}
+
 		const settings = readSettings();
 		if (!settings.login || !settings.email) {
 			warnMissingSettings();
@@ -59,6 +65,11 @@ export function activate(context: vscode.ExtensionContext) {
 	});
 
 	const toggleAutoInsert = vscode.commands.registerCommand('ft_utils.toggleAutoInsert', () => autoInsertController.toggle());
+	const toggleUpdateOnSave = vscode.commands.registerCommand('ft_utils.toggleUpdateOnSave', async () => {
+		const nextState = !isHeaderUpdateOnSaveEnabled(context);
+		await context.globalState.update(UPDATE_ON_SAVE_STATE_KEY, nextState);
+		notifier.show(nextState ? '42 header update on save on' : '42 header update on save off');
+	});
 
 	const fileCreateSubscription = vscode.workspace.onDidCreateFiles(async event => {
 		const settings = readSettings();
@@ -73,6 +84,7 @@ export function activate(context: vscode.ExtensionContext) {
 		starPromptCommand,
 		saveSubscription,
 		toggleAutoInsert,
+		toggleUpdateOnSave,
 		fileCreateSubscription,
 		autoInsertController,
 		notifier,
@@ -81,6 +93,10 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 export function deactivate() {}
+
+function isHeaderUpdateOnSaveEnabled(context: vscode.ExtensionContext): boolean {
+	return context.globalState.get<boolean>(UPDATE_ON_SAVE_STATE_KEY, true);
+}
 
 type HeaderApplyResult = 'inserted' | 'updated';
 
@@ -96,7 +112,8 @@ async function applyHeader(editor: vscode.TextEditor, settings: HeaderSettings):
 	const createdBy = detection?.createdBy ?? settings.login;
 	const needsSeparatorLine = detection ? hasTextDirectlyBelowHeader(document) : false;
 	const separator = needsSeparatorLine ? '\n' : '';
-	const headerText = buildHeaderText(fileName, settings, createdAt, now, delimiters, createdBy) + separator;
+	const headerWidth = getHeaderWidthForLanguage(document.languageId);
+	const headerText = buildHeaderText(fileName, settings, createdAt, now, delimiters, createdBy, headerWidth) + separator;
 
 	await editor.edit(editBuilder => {
 		if (detection) {

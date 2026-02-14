@@ -1,13 +1,6 @@
 import {
-	BY_SUFFIX,
-	COLUMN_SUFFIX,
-	CREATED_SUFFIX,
-	DEFAULT_HEADER_WIDTH,
-	FILE_SUFFIX,
+	HEADER_SUFFIXES,
 	MIN_INNER_WIDTH,
-	SPACER_SUFFIX,
-	TITLE_SUFFIX,
-	UPDATED_SUFFIX,
 } from './headerConstants';
 import type { CommentDelimiters, HeaderSettings } from './types';
 
@@ -18,8 +11,9 @@ export function buildHeaderText(
 	updatedAt: string,
 	delimiters: CommentDelimiters,
 	createdBylogin = settings.login,
+	totalWidth: number,
 ): string {
-	return buildHeaderLines(fileName, settings, createdAt, updatedAt, delimiters, createdBylogin).join('\n');
+	return buildHeaderLines(fileName, settings, createdAt, updatedAt, delimiters, createdBylogin, totalWidth).join('\n');
 }
 
 export function buildHeaderLines(
@@ -29,20 +23,21 @@ export function buildHeaderLines(
 	updatedAt: string,
 	delimiters: CommentDelimiters,
 	createdBylogin = settings.login,
+	totalWidth: number,
 ): string[] {
-	const innerWidth = computeInnerWidth(DEFAULT_HEADER_WIDTH, delimiters);
+	const innerWidth = computeInnerWidth(totalWidth, delimiters);
 	const identity = `${settings.login} <${settings.email}>`;
 
 	return [
 		formatBorder(innerWidth, delimiters),
 		formatEmpty(innerWidth, delimiters),
-		formatRightAligned(TITLE_SUFFIX, innerWidth, delimiters),
-		formatLine(`  ${fileName}`, FILE_SUFFIX, innerWidth, delimiters),
-		formatRightAligned(COLUMN_SUFFIX, innerWidth, delimiters),
-		formatLine(`  By: ${identity}`, BY_SUFFIX, innerWidth, delimiters),
-		formatRightAligned(SPACER_SUFFIX, innerWidth, delimiters),
-		formatLine(`  Created: ${createdAt} by ${createdBylogin}`, CREATED_SUFFIX, innerWidth, delimiters),
-		formatLine(`  Updated: ${updatedAt} by ${settings.login}`, UPDATED_SUFFIX, innerWidth, delimiters),
+		formatRightAligned(HEADER_SUFFIXES.title, innerWidth, delimiters),
+		formatLine(`  ${fileName}`, HEADER_SUFFIXES.file, innerWidth, delimiters),
+		formatRightAligned(HEADER_SUFFIXES.column, innerWidth, delimiters),
+		formatLine(`  By: ${identity}`, HEADER_SUFFIXES.by, innerWidth, delimiters),
+		formatRightAligned(HEADER_SUFFIXES.spacer, innerWidth, delimiters),
+		formatLine(`  Created: ${createdAt} by ${createdBylogin}`, HEADER_SUFFIXES.created, innerWidth, delimiters),
+		formatLine(`  Updated: ${updatedAt} by ${settings.login}`, HEADER_SUFFIXES.updated, innerWidth, delimiters),
 		formatEmpty(innerWidth, delimiters),
 		formatBorder(innerWidth, delimiters),
 	];

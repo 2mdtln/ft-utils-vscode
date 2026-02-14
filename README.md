@@ -1,6 +1,6 @@
 # ft_utils
 
-A lightweight VS Code extension providing essential 42 utilities for C development.
+A lightweight VS Code extension providing essential 42 utilities for C and Python development.
 - Insert and maintain the 42 header
 - Auto-insert headers on new files
 - Track function count in `.c` files from the status bar
@@ -34,11 +34,17 @@ A lightweight VS Code extension providing essential 42 utilities for C developme
 - If the header already exists, it updates the `Updated` line.
 - Saving a file with an existing header refreshes the `Updated` timestamp.
 - Supports long logins and long emails while preserving header layout.
+- Uses a 79-character total header width for Python files to respect flake8 linter standards (`E501`).
 
-### Auto Header
+#### Auto Header
 - Toggle from the status bar: **42 Auto Header**
 - Toggle from command: `ft_utils: Toggle 42 Auto Header`
 - When enabled, creating a new file auto-inserts a header.
+
+#### Update On Save
+- Toggle from command: `ft_utils: Toggle Header Update On Save`
+- Enabled by default.
+- When disabled, saving files no longer refreshes the header `Updated` line.
 
 ### Function Count (`.c`)
 - Shows `Functions: N` in the status bar when a `.c` file is active.
