@@ -11,6 +11,7 @@ export type HeaderSettings = {
 };
 
 export type ExistingHeader = {
+	startLine: number;
 	range: vscode.Range;
 	createdAt?: string;
 	createdBy?: string;

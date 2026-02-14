@@ -14,7 +14,7 @@ A lightweight VS Code extension providing essential 42 utilities for C and Pytho
 #   By: mtaheri <mtaheri@student.42istanbul.com.tr>  +#+  +:+       +#+        #
 #                                                  +#+#+#+#+#+   +#+           #
 #   Created: 2025/11/15 20:39:25 by mtaheri             #+#    #+#             #
-#   Updated: 2026/02/10 18:24:32 by mtaheri            ###   ########.fr       #
+#   Updated: 2026/02/14 23:06:52 by mtaheri            ###   ########.fr       #
 #                                                                              #
 # **************************************************************************** #
 ```

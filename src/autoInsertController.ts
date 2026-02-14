@@ -2,7 +2,7 @@ import * as path from 'node:path';
 import * as vscode from 'vscode';
 import { getHeaderWidthForLanguage } from './headerConstants';
 import { buildHeaderText } from './headerFormat';
-import { detectHeader } from './headerDetection';
+import { detectHeader, getHeaderStartLine } from './headerDetection';
 import { getDelimitersForDocument } from './commentDelimiters';
 import type { HeaderSettings } from './types';
 import { formatTimestamp } from './time';
@@ -67,7 +67,8 @@ export class AutoInsertController implements vscode.Disposable {
 			const headerText = buildHeaderText(path.basename(document.fileName), settings, now, now, delimiters, settings.login, headerWidth);
 			const edit = new vscode.WorkspaceEdit();
 			const trailing = document.getText().length > 0 ? '\n\n' : '\n';
-			edit.insert(uri, new vscode.Position(0, 0), headerText + trailing);
+			const startLine = getHeaderStartLine(document);
+			edit.insert(uri, new vscode.Position(startLine, 0), headerText + trailing);
 			const applied = await vscode.workspace.applyEdit(edit);
 			if (applied) {
 				this.notifier.show(`${STATUS_LABEL} inserted in ${path.basename(document.fileName)}`);

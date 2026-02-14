@@ -3,7 +3,7 @@ import * as vscode from 'vscode';
 import { AutoInsertController } from './autoInsertController';
 import { getHeaderWidthForLanguage, HEADER_LINE_COUNT } from './headerConstants';
 import { buildHeaderText } from './headerFormat';
-import { detectHeader, createHeaderEdit } from './headerDetection';
+import { detectHeader, createHeaderEdit, getHeaderStartLine } from './headerDetection';
 import { getDelimitersForDocument } from './commentDelimiters';
 import { promptForSettings, readSettings, warnMissingSettings } from './settings';
 import { formatTimestamp } from './time';
@@ -110,7 +110,7 @@ async function applyHeader(editor: vscode.TextEditor, settings: HeaderSettings):
 	const now = formatTimestamp(new Date());
 	const createdAt = detection?.createdAt ?? now;
 	const createdBy = detection?.createdBy ?? settings.login;
-	const needsSeparatorLine = detection ? hasTextDirectlyBelowHeader(document) : false;
+	const needsSeparatorLine = detection ? hasTextDirectlyBelowHeader(document, detection.startLine) : false;
 	const separator = needsSeparatorLine ? '\n' : '';
 	const headerWidth = getHeaderWidthForLanguage(document.languageId);
 	const headerText = buildHeaderText(fileName, settings, createdAt, now, delimiters, createdBy, headerWidth) + separator;
@@ -121,16 +121,18 @@ async function applyHeader(editor: vscode.TextEditor, settings: HeaderSettings):
 		} else {
 			const hasContent = document.getText().length > 0;
 			const trailing = hasContent ? '\n\n' : '\n';
-			editBuilder.insert(new vscode.Position(0, 0), headerText + trailing);
+			const startLine = getHeaderStartLine(document);
+			editBuilder.insert(new vscode.Position(startLine, 0), headerText + trailing);
 		}
 	});
 
 	return result;
 }
 
-function hasTextDirectlyBelowHeader(document: vscode.TextDocument): boolean {
-	if (document.lineCount <= HEADER_LINE_COUNT) {
+function hasTextDirectlyBelowHeader(document: vscode.TextDocument, startLine: number): boolean {
+	const lineBelowHeader = startLine + HEADER_LINE_COUNT;
+	if (document.lineCount <= lineBelowHeader) {
 		return false;
 	}
-	return document.lineAt(HEADER_LINE_COUNT).text.trim().length > 0;
+	return document.lineAt(lineBelowHeader).text.trim().length > 0;
 }
