@@ -1,6 +1,6 @@
 # ft_utils
 
-Practical 42 utilities for VS Code focused on everyday C workflow:
+A lightweight VS Code extension providing essential 42 utilities for C development.
 - Insert and maintain the 42 header
 - Auto-insert headers on new files
 - Track function count in `.c` files from the status bar
@@ -14,7 +14,7 @@ Practical 42 utilities for VS Code focused on everyday C workflow:
 #   By: mtaheri <mtaheri@student.42istanbul.com.tr>  +#+  +:+       +#+        #
 #                                                  +#+#+#+#+#+   +#+           #
 #   Created: 2025/11/15 20:39:25 by mtaheri             #+#    #+#             #
-#   Updated: 2026/02/04 18:38:54 by ybarut             ###   ########.fr       #
+#   Updated: 2026/02/10 18:24:32 by mtaheri            ###   ########.fr       #
 #                                                                              #
 # **************************************************************************** #
 ```
@@ -29,7 +29,7 @@ Practical 42 utilities for VS Code focused on everyday C workflow:
 
 ### 42 Header
 - Command: `ft_utils: Insert 42 Header`
-- Shortcut: `Cmd+Alt+H` (macOS) / `Ctrl+Alt+H` (Windows/Linux)
+- Shortcut: `⌘⌥H` (macOS) / `Ctrl+Alt+H` (Windows/Linux)
 - Inserts the standard 42 header at the top of the file.
 - If the header already exists, it updates the `Updated` line.
 - Saving a file with an existing header refreshes the `Updated` timestamp.
@@ -41,7 +41,7 @@ Practical 42 utilities for VS Code focused on everyday C workflow:
 - When enabled, creating a new file auto-inserts a header.
 
 ### Function Count (`.c`)
-- Shows `Function Count: N` in the status bar when a `.c` file is active.
+- Shows `Functions: N` in the status bar when a `.c` file is active.
 - Warns when function count is `> 5`.
 - Updates automatically as you edit.
 
@@ -68,7 +68,7 @@ Add these keys to your VS Code `settings.json`:
 
 ## Star
 
-If this extension helps your workflow, please ⭐️ the repo. thanks :)
+If this extension improves your workflow, consider ⭐ starring the [repository](https://github.com/2mdtln/ft-utils-vscode).
 
 ## License
 

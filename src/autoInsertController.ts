@@ -47,7 +47,7 @@ export class AutoInsertController implements vscode.Disposable {
 
 	private updateStatusBar() {
 		const active = this.isEnabled();
-		this.statusItem.text = active ? `$(pass-filled) ${STATUS_LABEL}` : `$(circle-slash) ${STATUS_LABEL}`;
+		this.statusItem.text = active ? `$(pass-filled) ${STATUS_LABEL}` : `$(circle-outline) ${STATUS_LABEL}`;
 		this.statusItem.tooltip = active
 			? `${STATUS_LABEL} for new files is enabled (click to disable).`
 			: `${STATUS_LABEL} for new files is disabled (click to enable).`;

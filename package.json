@@ -2,7 +2,7 @@
   "name": "ft-header",
   "displayName": "ft_utils",
   "description": "42 utilities for C projects: header, function count, and more.",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "icon": "42.png",
   "publisher": "2mdtln",
   "repository": {
@@ -36,15 +36,15 @@
     "commands": [
       {
         "command": "ft_utils.insertHeader",
-        "title": "Insert 42 Header"
+        "title": "ft_utils: Insert 42 Header"
       },
       {
         "command": "ft_utils.toggleAutoInsert",
-        "title": "Toggle 42 Auto Header"
+        "title": "ft_utils: Toggle 42 Auto Header"
       },
       {
         "command": "ft_utils.showStarPrompt",
-        "title": "Show GitHub Star Prompt"
+        "title": "ft_utils: Show GitHub Star Prompt"
       }
     ],
     "keybindings": [

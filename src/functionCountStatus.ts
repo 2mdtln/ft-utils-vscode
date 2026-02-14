@@ -39,7 +39,7 @@ export class FunctionCountStatus implements vscode.Disposable {
 
 		const count = countFunctions(document.getText());
 		const warning = count > FUNCTION_WARNING_THRESHOLD ? ' $(warning)' : '';
-		this.statusBarItem.text = `Function Count: ${count}${warning}`;
+		this.statusBarItem.text = `Functions: ${count}${warning}`;
 		this.statusBarItem.tooltip = `Detected C functions: ${count}`;
 		this.statusBarItem.show();
 	}
